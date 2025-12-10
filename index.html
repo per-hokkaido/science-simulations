@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>理科シミュレーション集 | Science Simulations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --primary-light: #2d5a8a;
+            --primary-dark: #0f2744;
+            --accent: #ff6b35;
+            --accent-light: #ff8f66;
+            --secondary: #4ecdc4;
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-light: #94a3b8;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --physics-color: #3b82f6;
+            --chemistry-color: #8b5cf6;
+            --biology-color: #22c55e;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans JP', 'Outfit', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 8px rgba(255,107,53,0.4);
+        }
+
+        .logo-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-text span {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 400;
+            opacity: 0.8;
+            letter-spacing: 0.05em;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            color: white;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .github-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.15);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .github-link:hover { background: rgba(255,255,255,0.25); }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .stat { text-align: center; }
+
+        .stat-number {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label { font-size: 0.85rem; opacity: 0.8; }
+
+        /* Filter */
+        .filter-section {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 80px;
+            z-index: 90;
+        }
+
+        .filter-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .subject-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .subject-tab {
+            padding: 0.6rem 1.2rem;
+            border: 2px solid var(--border);
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .subject-tab:hover {
+            border-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .subject-tab.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .subject-tab[data-subject="physics"].active {
+            background: var(--physics-color);
+            border-color: var(--physics-color);
+        }
+
+        .subject-tab[data-subject="chemistry"].active {
+            background: var(--chemistry-color);
+            border-color: var(--chemistry-color);
+        }
+
+        .subject-tab[data-subject="biology"].active {
+            background: var(--biology-color);
+            border-color: var(--biology-color);
+        }
+
+        .category-filter {
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .filter-tab:hover {
+            background: var(--bg-main);
+            color: var(--text-primary);
+        }
+
+        .filter-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-main);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            font-size: 0.9rem;
+            width: 200px;
+            font-family: inherit;
+            color: var(--text-primary);
+        }
+
+        .search-box input:focus { outline: none; }
+        .search-box input::placeholder { color: var(--text-light); }
+
+        /* Main */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .results-count {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Grid */
+        .sim-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .sim-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            border: 1px solid var(--border);
+        }
+
+        .sim-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .sim-thumbnail {
+            aspect-ratio: 16/10;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .sim-thumbnail::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(78,205,196,0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(255,107,53,0.2) 0%, transparent 50%);
+        }
+
+        .sim-thumbnail.has-image::before {
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 100%);
+        }
+
+        .sim-icon {
+            font-size: 4rem;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        .sim-thumbnail.has-image .sim-icon { display: none; }
+
+        .sim-card[data-subject="physics"] .sim-thumbnail {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        }
+
+        .sim-card[data-subject="chemistry"] .sim-thumbnail {
+            background: linear-gradient(135deg, #5b21b6 0%, #8b5cf6 100%);
+        }
+
+        .sim-card[data-subject="biology"] .sim-thumbnail {
+            background: linear-gradient(135deg, #166534 0%, #22c55e 100%);
+        }
+
+        .sim-info { padding: 1.25rem; }
+
+        .sim-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .sim-description {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .sim-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .sim-tags {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .sim-tag {
+            background: var(--bg-main);
+            color: var(--text-secondary);
+            padding: 0.2rem 0.6rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .sim-tag.subject { color: white; }
+        .sim-tag.subject.physics { background: var(--physics-color); }
+        .sim-tag.subject.chemistry { background: var(--chemistry-color); }
+        .sim-tag.subject.biology { background: var(--biology-color); }
+
+        .play-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .sim-card:hover .play-btn { background: var(--accent); }
+
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-about h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-about p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+
+        .footer-links h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            opacity: 0.6;
+        }
+
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.5rem; }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .no-results-icon { font-size: 4rem; margin-bottom: 1rem; opacity: 0.5; }
+        .no-results h3 { font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--text-primary); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .footer-content { grid-template-columns: 1fr 1fr; }
+            .footer-about { grid-column: span 2; }
+        }
+
+        @media (max-width: 768px) {
+            .header-content { padding: 0.75rem 1rem; }
+            .logo-text { font-size: 1.25rem; }
+            .header-nav { display: none; }
+            .hero { padding: 2rem 1rem; }
+            .hero h1 { font-size: 1.75rem; }
+            .hero-stats { gap: 1.5rem; }
+            .stat-number { font-size: 2rem; }
+            .filter-section { padding: 0.75rem 1rem; top: 64px; }
+            .filter-content { flex-direction: column; align-items: stretch; }
+            .subject-tabs, .filter-tabs { justify-content: center; }
+            .search-box { width: 100%; }
+            .search-box input { width: 100%; }
+            main { padding: 1.5rem 1rem; }
+            .sim-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+            .footer-content { grid-template-columns: 1fr; }
+            .footer-about { grid-column: span 1; }
+            .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .sim-card { animation: fadeInUp 0.4s ease-out backwards; }
+        .sim-card:nth-child(1) { animation-delay: 0.02s; }
+        .sim-card:nth-child(2) { animation-delay: 0.04s; }
+        .sim-card:nth-child(3) { animation-delay: 0.06s; }
+        .sim-card:nth-child(4) { animation-delay: 0.08s; }
+        .sim-card:nth-child(5) { animation-delay: 0.10s; }
+        .sim-card:nth-child(6) { animation-delay: 0.12s; }
+        .sim-card:nth-child(7) { animation-delay: 0.14s; }
+        .sim-card:nth-child(8) { animation-delay: 0.16s; }
+        .sim-card:nth-child(9) { animation-delay: 0.18s; }
+        .sim-card:nth-child(10) { animation-delay: 0.20s; }
+        .sim-card:nth-child(11) { animation-delay: 0.22s; }
+        .sim-card:nth-child(12) { animation-delay: 0.24s; }
+        .sim-card:nth-child(13) { animation-delay: 0.26s; }
+        .sim-card:nth-child(14) { animation-delay: 0.28s; }
+        .sim-card:nth-child(15) { animation-delay: 0.30s; }
+        .sim-card:nth-child(16) { animation-delay: 0.32s; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">🔬</div>
+                <div class="logo-text">
+                    Science Sims
+                    <span>理科シミュレーション集</span>
+                </div>
+            </a>
+            <nav class="header-nav">
+                <a href="#simulations" class="nav-link">シミュレーション</a>
+                <a href="#about" class="nav-link">このサイトについて</a>
+
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>高校理科のインタラクティブシミュレーション</h1>
+            <p>授業で使える、歴史的実験を再現した教育用シミュレーション。<br>ブラウザで動作し、タブレットにも対応しています。</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">16</div>
+                    <div class="stat-label">シミュレーション</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">教科</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">無料</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="filter-section">
+        <div class="filter-content">
+            <div class="subject-tabs">
+                <button class="subject-tab active" data-subject="all">すべて</button>
+                <button class="subject-tab" data-subject="physics">🔬 物理 <span style="opacity:0.7">(11)</span></button>
+                <button class="subject-tab" data-subject="chemistry">🧪 化学 <span style="opacity:0.7">(1)</span></button>
+                <button class="subject-tab" data-subject="biology">🌿 生物 <span style="opacity:0.7">(4)</span></button>
+            </div>
+            <div class="search-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" id="search-input" placeholder="シミュレーションを検索...">
+            </div>
+        </div>
+        <div class="filter-content category-filter">
+            <div class="filter-tabs" id="category-tabs">
+                <button class="filter-tab active" data-filter="all">すべて</button>
+                <button class="filter-tab" data-filter="electron" data-subject="physics">電子の発見</button>
+                <button class="filter-tab" data-filter="atomic" data-subject="physics">原子物理</button>
+                <button class="filter-tab" data-filter="quantum" data-subject="physics">量子論</button>
+                <button class="filter-tab" data-filter="atomic-chem" data-subject="chemistry" style="display:none;">原子の構造</button>
+                <button class="filter-tab" data-filter="ecology" data-subject="biology" style="display:none;">生態系</button>
+            </div>
+        </div>
+    </section>
+
+    <main id="simulations">
+        <div class="section-header">
+            <h2 class="section-title">シミュレーション一覧</h2>
+            <span class="results-count"><span id="visible-count">16</span>件のシミュレーション</span>
+        </div>
+
+        <div class="sim-grid" id="sim-grid">
+            
+            <!-- ========== 物理：電子の発見 ========== -->
+            
+            <a href="https://per-hokkaido.github.io/cathode_ray/cathode_ray_improved.html" target="_blank" class="sim-card" data-subject="physics" data-category="electron" data-keywords="陰極線 クルックス管 真空放電 電子">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">📺</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">陰極線の実験</h3>
+                    <p class="sim-description">クルックス管を再現し、陰極線の性質（直進性、磁場・電場による偏向）を探究的に学習します。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject physics">物理</span>
+                            <span class="sim-tag">電子の発見</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://per-hokkaido.github.io/thomson/thomson_em_measurement.html" target="_blank" class="sim-card" data-subject="physics" data-category="electron" data-keywords="トムソン 比電荷 e/m 電子">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">⚡</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">トムソンの実験</h3>
+                    <p class="sim-description">電場と磁場を用いて電子の比電荷（e/m）を測定するトムソンの実験を再現します。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject physics">物理</span>
+                            <span class="sim-tag">電子の発見</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://per-hokkaido.github.io/millikan/millikan_fixed_v2.html" target="_blank" class="sim-card" data-subject="physics" data-category="electron" data-keywords="ミリカン 油滴 電荷素量 電気素量">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">💧</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">ミリカンの油滴実験</h3>
+                    <p class="sim-description">油滴の運動を観察し、電荷量を測定。データから電気素量を導き出す探究活動ができます。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject physics">物理</span>
+                            <span class="sim-tag">電子の発見</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- ========== 物理：原子物理 ========== -->
+
+            <a href="https://per-hokkaido.github.io/classical_atom/classical_atom_collapse.html" target="_blank" class="sim-card" data-subject="physics" data-category="atomic" data-keywords="古典 原子 崩壊 電磁波 放射">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">💥</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">古典物理学の原子モデル</h3>
+                    <p class="sim-description">古典電磁気学に基づく原子モデルの問題点（原子の崩壊）を視覚的に理解します。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject physics">物理</span>
+                            <span class="sim-tag">原子物理</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://per-hokkaido.github.io/rutherford/rutherford_sim.html" target="_blank" class="sim-card" data-subject="physics" data-category="atomic" data-keywords="ラザフォード 散乱 α線 アルファ 原子核 金箔">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">🎯</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">ラザフォードの散乱実験</h3>
+                    <p class="sim-description">トムソンモデルと実際の原子を比較し、α粒子の散乱から原子核の存在を発見的に学びます。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject physics">物理</span>
+                            <span class="sim-tag">原子物理</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://per-hokkaido.github.io/hydrogen_spectrum/hydrogen_spectrum.html" target="_blank" class="sim-card" data-subject="physics" data-category="atomic" data-keywords="水素 スペクトル ボーア バルマー 線スペクトル">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">🌈</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">水素原子のスペクトル</h3>
+                    <p class="sim-description">ボーアモデルに基づく水素原子の線スペクトルを視覚化し、エネルギー準位を学びます。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject physics">物理</span>
+                            <span class="sim-tag">原子物理</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- ========== 物理：量子論 ========== -->
+
+            <a href="https://per-hokkaido.github.io/photoelectric/photoelectric_phet.html" target="_blank" class="sim-card" data-subject="physics" data-category="quantum" data-keywords="光電効果 光子 アインシュタイン 仕事関数 振動数">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">💡</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">光電効果</h3>
+                    <p class="sim-description">光の振動数と光電子の関係を調べ、アインシュタインの光量子仮説を体験的に理解します。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject physics">物理</span>
+                            <span class="sim-tag">量子論</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://per-hokkaido.github.io/photoelectric-effect/photoelectric_effect_simulation.html" target="_blank" class="sim-card" data-subject="physics" data-category="quantum" data-keywords="光電効果 古典 波動 強度">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">🌊</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">古典論での光電効果</h3>
+                    <p class="sim-description">古典的な波動論では光電効果を説明できないことを視覚的に確認します。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject physics">物理</span>
+                            <span class="sim-tag">量子論</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://per-hokkaido.github.io/compton/compton_scattering.html" target="_blank" class="sim-card" data-subject="physics" data-category="quantum" data-keywords="コンプトン 散乱 X線 光子 運動量">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">☢️</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">コンプトン散乱</h3>
+                    <p class="sim-description">X線と電子の衝突による波長変化を観察し、光の粒子性を確認します。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject physics">物理</span>
+                            <span class="sim-tag">量子論</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://per-hokkaido.github.io/bragg/bragg_simulation.html" target="_blank" class="sim-card" data-subject="physics" data-category="quantum" data-keywords="ブラッグ 反射 結晶 回折 X線">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">💎</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">ブラッグ反射</h3>
+                    <p class="sim-description">結晶によるX線回折を観察し、ブラッグの条件を理解します。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject physics">物理</span>
+                            <span class="sim-tag">量子論</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://per-hokkaido.github.io/electron_wave/electron_wave_simulation.html" target="_blank" class="sim-card" data-subject="physics" data-category="quantum" data-keywords="電子 波動 粒子 二重性 ド・ブロイ">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">〰️</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">電子の二重性</h3>
+                    <p class="sim-description">電子の波動性と粒子性を視覚化し、量子力学の基礎概念を学びます。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject physics">物理</span>
+                            <span class="sim-tag">量子論</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- ========== 化学 ========== -->
+
+            <a href="https://per-hokkaido.github.io/flame-color/flame_color_sim_light_bg_strong.html" target="_blank" class="sim-card" data-subject="chemistry" data-category="atomic-chem" data-keywords="炎色反応 金属 スペクトル ナトリウム リチウム カリウム">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">🔥</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">炎色反応シミュレーション</h3>
+                    <p class="sim-description">金属元素による炎色反応を観察し、原子のエネルギー準位と光の関係を学びます。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject chemistry">化学</span>
+                            <span class="sim-tag">原子の構造</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- ========== 生物 ========== -->
+
+            <a href="https://per-hokkaido.github.io/invasive_species/invasive_species_final.html" target="_blank" class="sim-card" data-subject="biology" data-category="ecology" data-keywords="外来種 生態系 在来種 侵入 競争">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">🦎</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">外来種生態系シミュレーション</h3>
+                    <p class="sim-description">外来種の侵入が在来生態系に与える影響を視覚的にシミュレーションします。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject biology">生物</span>
+                            <span class="sim-tag">生態系</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://per-hokkaido.github.io/highway_assessment/highway_assessment.html" target="_blank" class="sim-card" data-subject="biology" data-category="ecology" data-keywords="環境アセスメント 道路 開発 影響評価">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">🛤️</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">環境アセスメントシミュレーション</h3>
+                    <p class="sim-description">道路建設が生態系に与える影響を評価する環境アセスメントを体験します。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject biology">生物</span>
+                            <span class="sim-tag">生態系</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://per-hokkaido.github.io/ecosystem/ecosystem2.html" target="_blank" class="sim-card" data-subject="biology" data-category="ecology" data-keywords="キーストーン 捕食者 生態系 バランス 食物連鎖">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">🦁</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">キーストーン種の除去実験</h3>
+                    <p class="sim-description">キーストーン種を除去したときの生態系への影響を観察します。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject biology">生物</span>
+                            <span class="sim-tag">生態系</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://per-hokkaido.github.io/pitfall/pitfall_sim_controlled_experiment_fixed.html" target="_blank" class="sim-card" data-subject="biology" data-category="ecology" data-keywords="ピットフォール 調査 昆虫 地表 サンプリング トラップ">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">🪲</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">地表を歩き回る生物シミュレーション</h3>
+                    <p class="sim-description">ピットフォールトラップによる地表性昆虫の調査方法を学びます。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject biology">生物</span>
+                            <span class="sim-tag">生態系</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="no-results" id="no-results" style="display: none;">
+            <div class="no-results-icon">🔍</div>
+            <h3>該当するシミュレーションがありません</h3>
+            <p>別のキーワードで検索してみてください</p>
+        </div>
+    </main>
+
+    <footer id="about">
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>Science Simulations</h3>
+                <p>
+                    このサイトは、高校理科の授業で使用できるインタラクティブなシミュレーションを集めたものです。
+                    歴史的な実験を追体験し、「実験結果から何がわかるか」を生徒自身が考える探究的な学習を支援します。
+                    すべてのシミュレーションはブラウザで動作し、タブレットやスマートフォンにも対応しています。
+                </p>
+            </div>
+            <div class="footer-links">
+                <h4>教科</h4>
+                <ul>
+                    <li><a href="#" onclick="selectSubject('physics'); return false;">🔬 物理（11）</a></li>
+                    <li><a href="#" onclick="selectSubject('chemistry'); return false;">🧪 化学（1）</a></li>
+                    <li><a href="#" onclick="selectSubject('biology'); return false;">🌿 生物（4）</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>リンク</h4>
+                <ul>
+                    <li><a href="https://phet.colorado.edu/ja/" target="_blank">PhET Simulations</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2025 Science Simulations by PER-Hokkaido</span>
+            <span>Made with ❤️ for Science Education</span>
+        </div>
+    </footer>
+
+    <script>
+        const subjectTabs = document.querySelectorAll('.subject-tab');
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const simCards = document.querySelectorAll('.sim-card');
+        const searchInput = document.getElementById('search-input');
+        const visibleCount = document.getElementById('visible-count');
+        const noResults = document.getElementById('no-results');
+        const simGrid = document.getElementById('sim-grid');
+
+        let currentSubject = 'all';
+        let currentFilter = 'all';
+        let currentSearch = '';
+
+        function updateCategoryTabs() {
+            filterTabs.forEach(tab => {
+                const tabSubject = tab.dataset.subject;
+                if (!tabSubject || currentSubject === 'all' || tabSubject === currentSubject) {
+                    tab.style.display = '';
+                } else {
+                    tab.style.display = 'none';
+                }
+            });
+            document.querySelector('.filter-tab[data-filter="all"]').style.display = '';
+        }
+
+        function updateVisibleCards() {
+            let count = 0;
+            simCards.forEach(card => {
+                const subject = card.dataset.subject;
+                const category = card.dataset.category;
+                const keywords = (card.dataset.keywords || '').toLowerCase();
+                const title = card.querySelector('.sim-title')?.textContent.toLowerCase() || '';
+                const description = card.querySelector('.sim-description')?.textContent.toLowerCase() || '';
+                
+                const matchesSubject = currentSubject === 'all' || subject === currentSubject;
+                const matchesFilter = currentFilter === 'all' || category === currentFilter;
+                const matchesSearch = currentSearch === '' || 
+                    keywords.includes(currentSearch) || 
+                    title.includes(currentSearch) || 
+                    description.includes(currentSearch);
+                
+                if (matchesSubject && matchesFilter && matchesSearch) {
+                    card.style.display = 'block';
+                    count++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            visibleCount.textContent = count;
+            if (count === 0) {
+                noResults.style.display = 'block';
+                simGrid.style.display = 'none';
+            } else {
+                noResults.style.display = 'none';
+                simGrid.style.display = 'grid';
+            }
+        }
+
+        function selectSubject(subject) {
+            subjectTabs.forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.subject === subject);
+            });
+            currentSubject = subject;
+            currentFilter = 'all';
+            filterTabs.forEach(t => t.classList.remove('active'));
+            document.querySelector('.filter-tab[data-filter="all"]').classList.add('active');
+            updateCategoryTabs();
+            updateVisibleCards();
+            document.getElementById('simulations').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        subjectTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                subjectTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentSubject = tab.dataset.subject;
+                currentFilter = 'all';
+                filterTabs.forEach(t => t.classList.remove('active'));
+                document.querySelector('.filter-tab[data-filter="all"]').classList.add('active');
+                updateCategoryTabs();
+                updateVisibleCards();
+            });
+        });
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentFilter = tab.dataset.filter;
+                updateVisibleCards();
+            });
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value.toLowerCase().trim();
+            updateVisibleCards();
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        updateCategoryTabs();
+    </script>
+</body>
+</html>
