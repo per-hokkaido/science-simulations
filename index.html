@@ -406,6 +406,15 @@
 
         .sim-thumbnail.has-image .sim-icon { display: none; }
 
+        .sim-thumbnail.has-image {
+            background-size: cover;
+            background-position: center;
+        }
+
+        .sim-thumbnail.has-image::before {
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.4) 100%);
+        }
+
         .sim-card[data-subject="physics"] .sim-thumbnail {
             background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
         }
@@ -680,7 +689,7 @@
             <!-- ========== 物理：電子の発見 ========== -->
             
             <a href="https://per-hokkaido.github.io/cathode_ray/cathode_ray_improved.html" target="_blank" class="sim-card" data-subject="physics" data-category="electron" data-keywords="陰極線 クルックス管 真空放電 電子">
-                <div class="sim-thumbnail">
+                <div class="sim-thumbnail has-image" style="background-image: url('images/cathode-ray.png');">
                     <span class="sim-icon">📺</span>
                 </div>
                 <div class="sim-info">
@@ -697,7 +706,7 @@
             </a>
 
             <a href="https://per-hokkaido.github.io/thomson/thomson_em_measurement.html" target="_blank" class="sim-card" data-subject="physics" data-category="electron" data-keywords="トムソン 比電荷 e/m 電子">
-                <div class="sim-thumbnail">
+                <div class="sim-thumbnail has-image" style="background-image: url('images/thomson.png');">
                     <span class="sim-icon">⚡</span>
                 </div>
                 <div class="sim-info">
@@ -714,7 +723,7 @@
             </a>
 
             <a href="https://per-hokkaido.github.io/millikan/millikan_fixed_v2.html" target="_blank" class="sim-card" data-subject="physics" data-category="electron" data-keywords="ミリカン 油滴 電荷素量 電気素量">
-                <div class="sim-thumbnail">
+                <div class="sim-thumbnail has-image" style="background-image: url('images/millikan.png');">
                     <span class="sim-icon">💧</span>
                 </div>
                 <div class="sim-info">
@@ -733,7 +742,7 @@
             <!-- ========== 物理：原子物理 ========== -->
 
             <a href="https://per-hokkaido.github.io/classical_atom/classical_atom_collapse.html" target="_blank" class="sim-card" data-subject="physics" data-category="atomic" data-keywords="古典 原子 崩壊 電磁波 放射">
-                <div class="sim-thumbnail">
+                <div class="sim-thumbnail has-image" style="background-image: url('images/classical-atom.png');">
                     <span class="sim-icon">💥</span>
                 </div>
                 <div class="sim-info">
@@ -750,7 +759,7 @@
             </a>
 
             <a href="https://per-hokkaido.github.io/rutherford/rutherford_sim.html" target="_blank" class="sim-card" data-subject="physics" data-category="atomic" data-keywords="ラザフォード 散乱 α線 アルファ 原子核 金箔">
-                <div class="sim-thumbnail">
+                <div class="sim-thumbnail has-image" style="background-image: url('images/rutherford.png');">
                     <span class="sim-icon">🎯</span>
                 </div>
                 <div class="sim-info">
@@ -767,7 +776,7 @@
             </a>
 
             <a href="https://per-hokkaido.github.io/hydrogen_spectrum/hydrogen_spectrum.html" target="_blank" class="sim-card" data-subject="physics" data-category="atomic" data-keywords="水素 スペクトル ボーア バルマー 線スペクトル">
-                <div class="sim-thumbnail">
+                <div class="sim-thumbnail has-image" style="background-image: url('images/hydrogen-spectrum.png');">
                     <span class="sim-icon">🌈</span>
                 </div>
                 <div class="sim-info">
@@ -786,7 +795,7 @@
             <!-- ========== 物理：量子論 ========== -->
 
             <a href="https://per-hokkaido.github.io/photoelectric/photoelectric_phet.html" target="_blank" class="sim-card" data-subject="physics" data-category="quantum" data-keywords="光電効果 光子 アインシュタイン 仕事関数 振動数">
-                <div class="sim-thumbnail">
+                <div class="sim-thumbnail has-image" style="background-image: url('images/photoelectric.png');">
                     <span class="sim-icon">💡</span>
                 </div>
                 <div class="sim-info">
@@ -803,7 +812,7 @@
             </a>
 
             <a href="https://per-hokkaido.github.io/photoelectric-effect/photoelectric_effect_simulation.html" target="_blank" class="sim-card" data-subject="physics" data-category="quantum" data-keywords="光電効果 古典 波動 強度">
-                <div class="sim-thumbnail">
+                <div class="sim-thumbnail has-image" style="background-image: url('images/photoelectric-classical.png');">
                     <span class="sim-icon">🌊</span>
                 </div>
                 <div class="sim-info">
@@ -820,7 +829,7 @@
             </a>
 
             <a href="https://per-hokkaido.github.io/compton/compton_scattering.html" target="_blank" class="sim-card" data-subject="physics" data-category="quantum" data-keywords="コンプトン 散乱 X線 光子 運動量">
-                <div class="sim-thumbnail">
+                <div class="sim-thumbnail has-image" style="background-image: url('images/compton.png');">
                     <span class="sim-icon">☢️</span>
                 </div>
                 <div class="sim-info">
@@ -837,7 +846,7 @@
             </a>
 
             <a href="https://per-hokkaido.github.io/bragg/bragg_simulation.html" target="_blank" class="sim-card" data-subject="physics" data-category="quantum" data-keywords="ブラッグ 反射 結晶 回折 X線">
-                <div class="sim-thumbnail">
+                <div class="sim-thumbnail has-image" style="background-image: url('images/bragg.png');">
                     <span class="sim-icon">💎</span>
                 </div>
                 <div class="sim-info">
@@ -854,7 +863,7 @@
             </a>
 
             <a href="https://per-hokkaido.github.io/electron_wave/electron_wave_simulation.html" target="_blank" class="sim-card" data-subject="physics" data-category="quantum" data-keywords="電子 波動 粒子 二重性 ド・ブロイ">
-                <div class="sim-thumbnail">
+                <div class="sim-thumbnail has-image" style="background-image: url('images/electron-wave.png');">
                     <span class="sim-icon">〰️</span>
                 </div>
                 <div class="sim-info">
@@ -873,7 +882,7 @@
             <!-- ========== 化学 ========== -->
 
             <a href="https://per-hokkaido.github.io/flame-color/flame_color_sim_light_bg_strong.html" target="_blank" class="sim-card" data-subject="chemistry" data-category="atomic-chem" data-keywords="炎色反応 金属 スペクトル ナトリウム リチウム カリウム">
-                <div class="sim-thumbnail">
+                <div class="sim-thumbnail has-image" style="background-image: url('images/flame-color.png');">
                     <span class="sim-icon">🔥</span>
                 </div>
                 <div class="sim-info">
@@ -892,7 +901,7 @@
             <!-- ========== 生物 ========== -->
 
             <a href="https://per-hokkaido.github.io/invasive_species/invasive_species_final.html" target="_blank" class="sim-card" data-subject="biology" data-category="ecology" data-keywords="外来種 生態系 在来種 侵入 競争">
-                <div class="sim-thumbnail">
+                <div class="sim-thumbnail has-image" style="background-image: url('images/invasive-species.png');">
                     <span class="sim-icon">🦎</span>
                 </div>
                 <div class="sim-info">
@@ -909,7 +918,7 @@
             </a>
 
             <a href="https://per-hokkaido.github.io/highway_assessment/highway_assessment.html" target="_blank" class="sim-card" data-subject="biology" data-category="ecology" data-keywords="環境アセスメント 道路 開発 影響評価">
-                <div class="sim-thumbnail">
+                <div class="sim-thumbnail has-image" style="background-image: url('images/highway-assessment.png');">
                     <span class="sim-icon">🛤️</span>
                 </div>
                 <div class="sim-info">
@@ -926,7 +935,7 @@
             </a>
 
             <a href="https://per-hokkaido.github.io/ecosystem/ecosystem2.html" target="_blank" class="sim-card" data-subject="biology" data-category="ecology" data-keywords="キーストーン 捕食者 生態系 バランス 食物連鎖">
-                <div class="sim-thumbnail">
+                <div class="sim-thumbnail has-image" style="background-image: url('images/keystone.png');">
                     <span class="sim-icon">🦁</span>
                 </div>
                 <div class="sim-info">
@@ -943,7 +952,7 @@
             </a>
 
             <a href="https://per-hokkaido.github.io/pitfall/pitfall_sim_controlled_experiment_fixed.html" target="_blank" class="sim-card" data-subject="biology" data-category="ecology" data-keywords="ピットフォール 調査 昆虫 地表 サンプリング トラップ">
-                <div class="sim-thumbnail">
+                <div class="sim-thumbnail has-image" style="background-image: url('images/pitfall.png');">
                     <span class="sim-icon">🪲</span>
                 </div>
                 <div class="sim-info">
@@ -1109,6 +1118,20 @@
         });
 
         updateCategoryTabs();
+
+        // 画像読み込み失敗時のフォールバック処理
+        document.querySelectorAll('.sim-thumbnail.has-image').forEach(thumb => {
+            const bgImage = thumb.style.backgroundImage;
+            if (bgImage) {
+                const url = bgImage.replace(/url\(['"]?([^'"]+)['"]?\)/, '$1');
+                const img = new Image();
+                img.onerror = () => {
+                    thumb.classList.remove('has-image');
+                    thumb.style.backgroundImage = '';
+                };
+                img.src = url;
+            }
+        });
     </script>
 </body>
 </html>
