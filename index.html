@@ -28,6 +28,7 @@
             --physics-color: #3b82f6;
             --chemistry-color: #8b5cf6;
             --biology-color: #22c55e;
+            --math-color: #f59e0b;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -254,6 +255,11 @@
             border-color: var(--biology-color);
         }
 
+        .subject-tab[data-subject="math"].active {
+            background: var(--math-color);
+            border-color: var(--math-color);
+        }
+
         .category-filter {
             margin-top: 0.75rem;
             padding-top: 0.75rem;
@@ -475,6 +481,7 @@
         .sim-tag.subject.physics { background: var(--physics-color); }
         .sim-tag.subject.chemistry { background: var(--chemistry-color); }
         .sim-tag.subject.biology { background: var(--biology-color); }
+        .sim-tag.subject.math { background: var(--math-color); }
 
         .play-btn {
             display: flex;
@@ -635,11 +642,11 @@
             <p>授業で使える、歴史的実験を再現した教育用シミュレーション。<br>ブラウザで動作し、タブレットにも対応しています。</p>
             <div class="hero-stats">
                 <div class="stat">
-                    <div class="stat-number">16</div>
+                    <div class="stat-number">21</div>
                     <div class="stat-label">シミュレーション</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-number">3</div>
+                    <div class="stat-number">4</div>
                     <div class="stat-label">教科</div>
                 </div>
                 <div class="stat">
@@ -654,9 +661,10 @@
         <div class="filter-content">
             <div class="subject-tabs">
                 <button class="subject-tab active" data-subject="all">すべて</button>
-                <button class="subject-tab" data-subject="physics">🔬 物理 <span style="opacity:0.7">(11)</span></button>
+                <button class="subject-tab" data-subject="physics">🔬 物理 <span style="opacity:0.7">(15)</span></button>
                 <button class="subject-tab" data-subject="chemistry">🧪 化学 <span style="opacity:0.7">(1)</span></button>
                 <button class="subject-tab" data-subject="biology">🌿 生物 <span style="opacity:0.7">(4)</span></button>
+                <button class="subject-tab" data-subject="math">📐 数学 <span style="opacity:0.7">(1)</span></button>
             </div>
             <div class="search-box">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -681,7 +689,7 @@
     <main id="simulations">
         <div class="section-header">
             <h2 class="section-title">シミュレーション一覧</h2>
-            <span class="results-count"><span id="visible-count">16</span>件のシミュレーション</span>
+            <span class="results-count"><span id="visible-count">21</span>件のシミュレーション</span>
         </div>
 
         <div class="sim-grid" id="sim-grid">
@@ -968,6 +976,91 @@
                 </div>
             </a>
 
+            <a href="https://per-hokkaido.github.io/half-life/half-life-simulation.html" target="_blank" class="sim-card" data-subject="physics" data-category="atomic" data-keywords="半減期 放射性崩壊 原子核 確率 指数関数 マクロ ミクロ">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">☢️</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">放射性崩壊と半減期シミュレーション</h3>
+                    <p class="sim-description">原子集団のマクロな崩壊曲線と1個の原子核のミクロな振る舞いを同時に観察します。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject physics">物理</span>
+                            <span class="sim-tag">原子</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://per-hokkaido.github.io/cloud_chamber/cloud_chamber_v5.html" target="_blank" class="sim-card" data-subject="physics" data-category="atomic" data-keywords="霧箱 放射線 α線 β線 γ線 磁場 軌跡 観察">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">☁️</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">仮想霧箱シミュレーション</h3>
+                    <p class="sim-description">α線・β線・γ線の軌跡を観察し、磁場中での振る舞いの違いを理解します。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject physics">物理</span>
+                            <span class="sim-tag">原子</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://per-hokkaido.github.io/universe_builder/universe_builder_simple.html" target="_blank" class="sim-card" data-subject="physics" data-category="atomic" data-keywords="素粒子 クォーク β崩壊 陽子 中性子 電荷保存 レプトン数">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">⚛️</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">ユニバース・ビルダー：素粒子パズル</h3>
+                    <p class="sim-description">クォークを組み合わせて陽子・中性子を作り、β崩壊における保存則を確認します。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject physics">物理</span>
+                            <span class="sim-tag">原子</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://per-hokkaido.github.io/mass_balance/mass_balance2.html" target="_blank" class="sim-card" data-subject="physics" data-category="atomic" data-keywords="質量欠損 E=mc² 結合エネルギー 原子核 質量 エネルギー 相対性理論">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">⚖️</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">質量の天秤：質量欠損シミュレーター</h3>
+                    <p class="sim-description">原子核の質量欠損と結合エネルギー、E=mc²の関係を天秤で視覚化します。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject physics">物理</span>
+                            <span class="sim-tag">原子</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://per-hokkaido.github.io/quadratic-function/quadratic-function.html" target="_blank" class="sim-card" data-subject="math" data-category="function" data-keywords="二次関数 放物線 グラフ パラメータ 頂点 放物運動">
+                <div class="sim-thumbnail">
+                    <span class="sim-icon">📐</span>
+                </div>
+                <div class="sim-info">
+                    <h3 class="sim-title">二次関数グラフ探究</h3>
+                    <p class="sim-description">二次関数のパラメータを変化させて放物線の変化を観察し、放物運動の理解を深めます。</p>
+                    <div class="sim-meta">
+                        <div class="sim-tags">
+                            <span class="sim-tag subject math">数学</span>
+                            <span class="sim-tag">関数</span>
+                        </div>
+                        <span class="play-btn">▶ 実行</span>
+                    </div>
+                </div>
+            </a>
+
         </div>
 
         <div class="no-results" id="no-results" style="display: none;">
@@ -990,9 +1083,10 @@
             <div class="footer-links">
                 <h4>教科</h4>
                 <ul>
-                    <li><a href="#" onclick="selectSubject('physics'); return false;">🔬 物理（11）</a></li>
+                    <li><a href="#" onclick="selectSubject('physics'); return false;">🔬 物理（15）</a></li>
                     <li><a href="#" onclick="selectSubject('chemistry'); return false;">🧪 化学（1）</a></li>
                     <li><a href="#" onclick="selectSubject('biology'); return false;">🌿 生物（4）</a></li>
+                    <li><a href="#" onclick="selectSubject('math'); return false;">📐 数学（1）</a></li>
                 </ul>
             </div>
             <div class="footer-links">
